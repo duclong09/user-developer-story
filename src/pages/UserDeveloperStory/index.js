@@ -4,9 +4,22 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import PersonAvatar from "../../images/Person-Avatar.png";
+import PersonAvatarStack from "../../images/stack.png";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+
+import IconButton from "@material-ui/core/IconButton";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
+
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
+import InboxIcon from "@material-ui/icons/Inbox";
+import DraftsIcon from "@material-ui/icons/Drafts";
+import StarIcon from "@material-ui/icons/Star";
 
 const index = makeStyles((theme) => ({
   root: {
@@ -24,7 +37,19 @@ const index = makeStyles((theme) => ({
     width: theme.spacing(7),
     height: theme.spacing(7),
   },
+
+  input: {
+    display: "none",
+  },
+  root: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
 }));
+
+// export default function InsetList() {
+//   const classes = index();
 
 export default function ImageAvatars() {
   const classes = index();
@@ -41,6 +66,33 @@ export default function ImageAvatars() {
                 src={PersonAvatar}
                 className={classes.large}
               />
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="contained-button-file"
+                multiple
+                type="file"
+              />
+              <label htmlFor="contained-button-file">
+                <Button variant="contained" color="primary" component="span">
+                  Upload
+                </Button>
+              </label>
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="icon-button-file"
+                type="file"
+              />
+              <label htmlFor="icon-button-file">
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="span"
+                >
+                  <PhotoCamera />
+                </IconButton>
+              </label>
             </div>
             <div>
               <br />
@@ -104,20 +156,23 @@ export default function ImageAvatars() {
                 <label htmlFor="inputFullname">
                   Pick the network sites you want to display
                 </label>
-                <div className="input-group flex-nowrap">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="addon-wrapping">
-                      @
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Stackoverflow"
-                    aria-label="Username"
-                    aria-describedby="addon-wrapping"
+
+                <ListItem button>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={PersonAvatarStack}
+                    className={classes.small}
                   />
-                </div>
+                  <ListItemText primary="Meta Stack Exchange 1" />
+                </ListItem>
+                <ListItem button>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={PersonAvatarStack}
+                    className={classes.small}
+                  />
+                  <ListItemText primary="Stackoverflow 1" />
+                </ListItem>
 
                 <div>
                   <br />
