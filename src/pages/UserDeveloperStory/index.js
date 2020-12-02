@@ -1,4 +1,7 @@
-import React from "react";
+//hook call api:
+import React, { useState, useEffect } from "react";
+//
+
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -47,6 +50,18 @@ const index = makeStyles((theme) => ({
 
 export default function ImageAvatars() {
   const classes = index();
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    fetch(`https://5fc709e7f3c77600165d7d5e.mockapi.io/api/v1/user-story/1`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        //  console.log(response);
+        setUser(response);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <div className="alert alert-info container">
@@ -57,7 +72,7 @@ export default function ImageAvatars() {
             <div className={classes.root}>
               <Avatar
                 alt="Remy Sharp"
-                src={PersonAvatar}
+                src={user.avatar}
                 className={classes.large}
               />
               <input
@@ -94,8 +109,8 @@ export default function ImageAvatars() {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="inputDisplay">Display name</label>
-                    <input className="form-control" id="inputDisplay" />
-                    <small id="emailHelp" class="form-text text-muted">
+                    <input className="form-control" id="inputDisplay"  defaultValue={user.displayname}/>
+                    <small id="emailHelp" className="form-text text-muted">
                       <i className="fas fa-exclamation"></i> How you appear to
                       other users on the Stack Overflow QvsA Network..
                     </small>
@@ -103,7 +118,7 @@ export default function ImageAvatars() {
                   <div className="form-group col-md-6">
                     <label htmlFor="inputFullname">Full name</label>
                     <input className="form-control" id="inputFullname" />
-                    <small id="emailHelp" class="form-text text-muted">
+                    <small id="emailHelp" className="form-text text-muted">
                       <i className="fas fa-exclamation"></i> How you appear to
                       employers, your private Teams, and to other users when you
                       share your Developer Story.
