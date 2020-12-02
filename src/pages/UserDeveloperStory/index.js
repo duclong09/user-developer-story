@@ -4,7 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import PersonAvatar from "../../images/Person-Avatar1.png";
-import PersonAvatarStack from "../../images/stack.png";
+// import PersonAvatarStack from "../../images/stack.png";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -12,10 +12,10 @@ import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
-import ListItem from "@material-ui/core/ListItem";
+// import ListItem from "@material-ui/core/ListItem";
 import "./index.scss";
-import ListItemText from "@material-ui/core/ListItemText";
-import { CenterFocusStrong } from "@material-ui/icons";
+// import ListItemText from "@material-ui/core/ListItemText";
+// import { CenterFocusStrong } from "@material-ui/icons";
 
 const index = makeStyles((theme) => ({
   root: {
@@ -95,10 +95,19 @@ export default function ImageAvatars() {
                   <div className="form-group col-md-6">
                     <label htmlFor="inputDisplay">Display name</label>
                     <input className="form-control" id="inputDisplay" />
+                    <small id="emailHelp" class="form-text text-muted">
+                      <i className="fas fa-exclamation"></i> How you appear to
+                      other users on the Stack Overflow QvsA Network..
+                    </small>
                   </div>
                   <div className="form-group col-md-6">
                     <label htmlFor="inputFullname">Full name</label>
                     <input className="form-control" id="inputFullname" />
+                    <small id="emailHelp" class="form-text text-muted">
+                      <i className="fas fa-exclamation"></i> How you appear to
+                      employers, your private Teams, and to other users when you
+                      share your Developer Story.
+                    </small>
                   </div>
                 </div>
                 <div className="form-group">
@@ -128,7 +137,7 @@ export default function ImageAvatars() {
                     <div className="input-group mb-2 mr-sm-2">
                       <div className="input-group-prepend">
                         <div className="input-group-text">
-                          <i class="fab fa-twitter"></i>
+                          <i className="fab fa-twitter"></i>
                         </div>
                       </div>
                       <input
@@ -151,7 +160,7 @@ export default function ImageAvatars() {
                     <div className="input-group mb-2 mr-sm-2">
                       <div className="input-group-prepend">
                         <div className="input-group-text">
-                          <i class="fas fa-cogs"></i>
+                          <i className="fas fa-cogs"></i>
                         </div>
                       </div>
                       <input
@@ -164,11 +173,6 @@ export default function ImageAvatars() {
                   </div>
                   <div className="form-group col-md-6">
                     <label htmlFor="inputFullname">GitHub</label>
-                    {/* <input
-                      className="form-control"
-                      id="inputFullname"
-                      placeholder="Profile link or username"
-                    /> */}
                     <label
                       className="sr-only"
                       htmlFor="inlineFormInputGroupUsername2"
@@ -176,7 +180,7 @@ export default function ImageAvatars() {
                     <div className="input-group mb-2 mr-sm-2">
                       <div className="input-group-prepend">
                         <div className="input-group-text">
-                          <i class="fab fa-github"></i>
+                          <i className="fab fa-github"></i>
                         </div>
                       </div>
                       <input
@@ -188,36 +192,56 @@ export default function ImageAvatars() {
                     </div>
                   </div>
                 </div>
+                <div className="form-row">
+                  <label className="block">
+                    Pick the network sites you want to display
+                  </label>
+                  <div className="network-site">
+                    <label className="item-btn">
+                      <span className="favicon-wrapper">
+                        <div
+                          className="favicon favicon-stackexchangemeta"
+                          title="Meta Stack Exchange"
+                        />
+                      </span>
 
-                <label htmlFor="inputFullname">
-                  Pick the network sites you want to display
-                </label>
-
-                {/* <ListItem button>
-                  <Avatar
-                    alt="Remy Sharp"
-                    src={PersonAvatarStack}
-                    className={classes.small}
-                  />
-                  <ListItemText primary="Meta Stack Exchange 1" />
-                </ListItem>
-                <ListItem button>
-                  <Avatar
-                    alt="Remy Sharp"
-                    src={PersonAvatarStack}
-                    className={classes.small}
-                  />
-                  <ListItemText primary="Stackoverflow 1" />
-                </ListItem> */}
-                <div className="form-group text-control">
-                  <select
-                    multiple
-                    className="form-control"
-                    id="exampleFormControlSelect2"
-                  >
-                      
-                  </select>
-               
+                      <span className="site-info">
+                        <span
+                          className="community-name"
+                          title="Meta Stack Exchange"
+                        >
+                          Meta Stack Exchange
+                          <span className="rep">1</span>
+                        </span>
+                      </span>
+                      <input
+                        type="checkbox"
+                        name="SelectedSEAccounts"
+                        defaultValue="meta.stackexchange.com"
+                      />
+                      <div className="check" />
+                    </label>
+                    <label className="item-btn">
+                      <span className="favicon-wrapper">
+                        <div
+                          className="favicon favicon-stackoverflow"
+                          title="Stack Overflow"
+                        />
+                      </span>
+                      <span className="site-info">
+                        <span className="community-name" title="Stack Overflow">
+                          Stack overflow
+                          <span className="rep">1</span>
+                        </span>
+                      </span>
+                      <input
+                        type="checkbox"
+                        name="SelectedSEAccounts"
+                        defaultValue="stackoverflow.com"
+                      />
+                      <div className="check" />
+                    </label>
+                  </div>
                 </div>
 
                 <div>
