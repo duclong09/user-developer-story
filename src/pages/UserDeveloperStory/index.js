@@ -1,17 +1,18 @@
 //hook call api:
 import React, { useState, useEffect } from "react";
 //
+import { API_ONE_USERSTORY } from "../../helpers/index";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import PersonAvatar from "../../images/Person-Avatar1.png";
+// import PersonAvatar from "../../images/Person-Avatar1.png";
 // import PersonAvatarStack from "../../images/stack.png";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-
+import Imgavatar from "../../images/stack.png";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
@@ -51,8 +52,15 @@ const index = makeStyles((theme) => ({
 export default function ImageAvatars() {
   const classes = index();
   const [user, setUser] = useState({});
+  // const [dataUserPost, setDataPost] = useState({});
+
+  const displaynameEl1 = React.useRef(null);
+  const fullnameEl1 = React.useRef(null);
+  const ImgavatarEl1 = React.useRef(null);
+
+  //Method: Get
   useEffect(() => {
-    fetch(`https://5fc709e7f3c77600165d7d5e.mockapi.io/api/v1/user-story/1`, {
+    fetch(`${API_ONE_USERSTORY}`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -62,7 +70,41 @@ export default function ImageAvatars() {
       })
       .catch((error) => console.log(error));
   }, []);
+  //Method : Post
+  // useEffect(() => {
+  //   fetch(`${API_ONE_USERSTORY}`, {
+  //     method: "POST",
+  //     data: user,
+  //   })
+  //     .then((res) => res.json())
+  //     .then((response) => {
+  //       //  console.log(response);
+  //       setUser(response);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
 
+  const HandleSubmit = (e) => {
+    e.preventDefault();
+    //  alert(`submiting name ${dataUserPost.fullname}`);
+    console.log(Imgavatar);
+    // setUser({})
+    fetch(`${API_ONE_USERSTORY}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        displayname: displaynameEl1.current.value,
+        fullname: fullnameEl1.current.value,
+        avatar: ImgavatarEl1.current.value,
+      }),
+    }).then((response) => {
+      console.log(response);
+    });
+  };
   return (
     <div className="alert alert-info container">
       <React.Fragment>
@@ -81,6 +123,7 @@ export default function ImageAvatars() {
                 id="contained-button-file"
                 multiple
                 type="file"
+                ref={ImgavatarEl1}
               />
               <label htmlFor="contained-button-file">
                 <Button variant="contained" color="primary" component="span">
@@ -109,7 +152,12 @@ export default function ImageAvatars() {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="inputDisplay">Display name</label>
-                    <input className="form-control" id="inputDisplay"  defaultValue={user.displayname}/>
+                    <input
+                      className="form-control"
+                      id="inputDisplay"
+                      defaultValue={user.displayname}
+                      ref={displaynameEl1}
+                    />
                     <small id="emailHelp" className="form-text text-muted">
                       <i className="fas fa-exclamation"></i> How you appear to
                       other users on the Stack Overflow QvsA Network..
@@ -117,7 +165,12 @@ export default function ImageAvatars() {
                   </div>
                   <div className="form-group col-md-6">
                     <label htmlFor="inputFullname">Full name</label>
-                    <input className="form-control" id="inputFullname" />
+                    <input
+                      className="form-control"
+                      id="inputFullname"
+                      defaultValue={user.fullname}
+                      ref={fullnameEl1}
+                    />
                     <small id="emailHelp" className="form-text text-muted">
                       <i className="fas fa-exclamation"></i> How you appear to
                       employers, your private Teams, and to other users when you
@@ -132,6 +185,7 @@ export default function ImageAvatars() {
                     className="form-control"
                     id="inputTitle"
                     placeholder="What? you current position?"
+                    defaultValue={user.title}
                   />
                 </div>
                 <div className="form-row">
@@ -141,6 +195,7 @@ export default function ImageAvatars() {
                       className="form-control"
                       id="inputDisplay"
                       placeholder="Curent Location"
+                      defaultValue={user.live}
                     />
                   </div>
                   <div className="form-group col-md-6">
@@ -160,6 +215,7 @@ export default function ImageAvatars() {
                         className="form-control"
                         id="inlineFormInputGroupUsername2"
                         placeholder="Profile link or usemame"
+                        defaultValue={user.twiter}
                       />
                     </div>
                   </div>
@@ -183,6 +239,7 @@ export default function ImageAvatars() {
                         className="form-control"
                         id="inlineFormInputGroupUsername2"
                         placeholder="http://example.org/"
+                        defaultValue={user.Website}
                       />
                     </div>
                   </div>
@@ -203,6 +260,7 @@ export default function ImageAvatars() {
                         className="form-control"
                         id="inlineFormInputGroupUsername2"
                         placeholder="Profile link or usemame"
+                        defaultValue={user.GitHub}
                       />
                     </div>
                   </div>
@@ -219,7 +277,6 @@ export default function ImageAvatars() {
                           title="Meta Stack Exchange"
                         />
                       </span>
-
                       <span className="site-info">
                         <span
                           className="community-name"
@@ -258,7 +315,6 @@ export default function ImageAvatars() {
                     </label>
                   </div>
                 </div>
-
                 <div>
                   <br />
                   <div className="alert alert-primary">
@@ -268,7 +324,7 @@ export default function ImageAvatars() {
                       aria-label="vertical contained primary button group"
                       variant="contained"
                     >
-                      <Button>Save</Button>
+                      <Button onClick={HandleSubmit}>Save</Button>
                     </ButtonGroup>
                     <ButtonGroup
                       orientation="vertical"
